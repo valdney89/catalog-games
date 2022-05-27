@@ -1,0 +1,13 @@
+{
+  "catalog": [
+    {
+      "id": 1,
+      "title": "Metal Gear Solid 2",
+      "year": 2001,
+      "console": "PS2",
+      "completed": true,
+      "dateCompletion": "07/08/2017",
+      "personalNotes": "I really liked this game. Kojima really nailed here."
+    }
+  ]
+}
