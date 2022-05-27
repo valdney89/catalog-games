@@ -1,0 +1,30 @@
+<h1>Games List</h1>
+<section class="list-section">
+  <!-- <ng-container *ngIf="catalogs$ | async">
+    <app-game-card
+      *ngFor="let catalog of catalogs$ | async"
+      [title]="catalog?.title"
+      [subtitle]="catalog?.console"
+      [content]="catalog?.personalNotes"
+    ></app-game-card>
+  </ng-container> -->
+  <mat-card style="width: 300px">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Primary</button>
+      <button mat-button color="accent">Accent</button>
+    </mat-card-actions>
+  </mat-card>
+</section>
