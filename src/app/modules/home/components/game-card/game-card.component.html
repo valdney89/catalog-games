@@ -1,7 +1,13 @@
-<mat-card>
+<mat-card [ngClass]="{'completed': completed}">
   <mat-card-title>{{ title }}</mat-card-title>
-  <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ subtitle }} - {{ year }}</mat-card-subtitle>
   <mat-card-content>
     <p>{{ content }}</p>
+    <small *ngIf="completed; else noCompleted">
+      <strong>Date of Completion:</strong> {{ dateCompletion | date: 'shortDate'}}
+    </small>
+    <ng-template #noCompleted>
+      <small class="game-card--unfinished">Not Completed</small>
+    </ng-template>
   </mat-card-content>
 </mat-card>

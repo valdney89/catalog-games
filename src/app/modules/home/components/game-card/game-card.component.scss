@@ -1,0 +1,15 @@
+::ng-deep .completed {
+  &.mat-card {
+    background: #73cf73;
+    color: #444;
+
+    .mat-card-subtitle {
+      color: #545454;
+    }
+  }
+}
+
+.game-card--unfinished {
+  opacity: .5;
+}
+

@@ -1,0 +1,34 @@
+@import "../../../../../assets/base/mixins";
+@import "../../../../../assets/base/tokens";
+
+.list-title {
+  margin: $spacing-stack-xl 0;
+}
+
+.list-actions {
+  margin-bottom: $spacing-stack-xs;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.list-section{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: $spacing-stack-xxxs;
+  width: 100%;
+
+  .game-card {
+    width: 100%;
+
+    @include break-md {
+      width: 48%;
+    }
+
+    @include break-xl {
+      width: 32%;
+    }
+  }
+}
