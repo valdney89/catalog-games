@@ -6,8 +6,82 @@
       "year": 2001,
       "console": "PS2",
       "completed": true,
-      "dateCompletion": "07/08/2017",
+      "dateCompletion": "2003-04-23T10:00:00.000Z",
       "personalNotes": "I really liked this game. Kojima really nailed here."
+    },
+    {
+      "id": 2,
+      "title": "Final Fantasy VII",
+      "year": 1997,
+      "console": "PS1",
+      "completed": true,
+      "dateCompletion": "2000-01-01T10:00:00.000Z",
+      "personalNotes": "Awesome rpg game."
+    },
+    {
+      "id": 3,
+      "title": "Super Mario Bros",
+      "year": 1985,
+      "console": "SUPER NINTENDO",
+      "completed": true,
+      "dateCompletion": "1997-12-10T10:00:00.000Z",
+      "personalNotes": "I lost some time to complete this game."
+    },
+    {
+      "id": 4,
+      "title": "Resident Evil 2",
+      "year": 1996,
+      "console": "PS1",
+      "completed": true,
+      "dateCompletion": "2002-08-01T10:00:00.000Z",
+      "personalNotes": "The best of the resident evil series, the first is really scared"
+    },
+    {
+      "title": "Crash Bandicoot",
+      "year": 1997,
+      "console": "PS1",
+      "completed": false,
+      "dateCompletion": null,
+      "personalNotes": "Crash Bandicoot is a video game franchise originally developed by Naughty Dog for the PlayStation console.",
+      "id": 5
+    }
+  ],
+  "consoles": [
+    {
+      "id": "1",
+      "value": "XBOX"
+    },
+    {
+      "id": "2",
+      "value": "XBOX ONE"
+    },
+    {
+      "id": "3",
+      "value": "SUPER NINTENDO"
+    },
+    {
+      "id": "4",
+      "value": "NINTENDO SWITCH"
+    },
+    {
+      "id": "5",
+      "value": "PS1"
+    },
+    {
+      "id": "6",
+      "value": "PS2"
+    },
+    {
+      "id": "7",
+      "value": "PS3"
+    },
+    {
+      "id": "8",
+      "value": "PS4"
+    },
+    {
+      "id": "9",
+      "value": "PS5"
     }
   ]
 }

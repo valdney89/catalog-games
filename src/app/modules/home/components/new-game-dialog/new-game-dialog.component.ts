@@ -1,35 +1,34 @@
+import { takeUntil } from 'rxjs';
+import { HomeService } from './../../services/home.service';
 import { Catalog } from './../../models/catalog';
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Console } from "../../models/console"
+import { Subject } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
-interface Console {
-  value: string;
-  viewValue: string;
-}
+@Component({
+  template: `Game added with success`,
+  selector: 'snack-bar-component',
+})
+export class NewGameSnackBarComponent {}
 
 @Component({
   selector: 'app-new-game-dialog',
   templateUrl: './new-game-dialog.component.html',
   styleUrls: ['./new-game-dialog.component.scss']
 })
-export class NewGameDialogComponent implements OnInit{
+export class NewGameDialogComponent implements OnInit,OnDestroy {
   gameForm!: FormGroup;
-
-  consoles: Console[] = [
-    {value: 'xbox', viewValue: 'XBOX'},
-    {value: 'xboxone', viewValue: 'XBOX ONE'},
-    {value: 'nintendoswitch', viewValue: 'SUPER NINTENDO'},
-    {value: 'nintendo', viewValue: 'NINTENDO SWITCH'},
-    {value: 'psone', viewValue: 'PS1'},
-    {value: 'pstwo', viewValue: 'PS2'},
-    {value: 'psthree', viewValue: 'PS3'},
-    {value: 'psfour', viewValue: 'PS4'},
-    {value: 'psfive', viewValue: 'PS5'},
-  ]
+  destroy$ = new Subject<void>();
+  consoles: Console[] = [];
+  maxDate = new Date();
 
   constructor(
     private formBuilder: FormBuilder,
+    private homeService: HomeService,
+    private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<NewGameDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Catalog,
   ) {}
@@ -39,25 +38,54 @@ export class NewGameDialogComponent implements OnInit{
       title: [null, Validators.required],
       year: [null, Validators.required],
       console: [null, Validators.required],
-      completed: [null, Validators.required],
+      completed: [false],
       dateCompletion: [null],
       personalNotes: [null],
     });
+
+    this.getConsoles();
+
+    this.gameForm.get('completed')?.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => {
+        if (value === false) {
+          this.gameForm.get('dateCompletion')?.setValue(null)
+        }
+      })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  isShowDateCompletion():boolean {
+    return this.gameForm.get('completed')?.value === true
+  }
+
   onSubmit() {
-    console.log('teste');
-    console.log(this.gameForm.value);
-    if (!this.gameForm.valid) {
-      return;
+    if(this.gameForm.valid){
+      this.homeService.addCatalog(this.gameForm.value)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
+          () => {
+            this.snackBar.openFromComponent(NewGameSnackBarComponent, {
+              duration: 5000,
+            });
+
+            this.homeService.changeCatalogs()
+          }
+        )
     }
   }
 
-  isShowDateCompletion():boolean {
-    return true
+  private getConsoles(): void {
+    this.homeService.getConsoles()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(consoles => this.consoles = consoles)
   }
 }

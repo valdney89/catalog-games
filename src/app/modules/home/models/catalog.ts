@@ -1,3 +1,5 @@
+import { Console } from "./console"
+
 export interface Catalog {
   title: string,
   year: number,

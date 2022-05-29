@@ -1,9 +1,10 @@
 import { NewGameDialogComponent } from './../new-game-dialog/new-game-dialog.component';
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Observable, Subject, switchMap, takeUntil } from "rxjs";
+import { debounceTime, distinctUntilChanged, startWith, Subject, switchMap, takeUntil, tap } from "rxjs";
 import { MatDialog } from '@angular/material/dialog';
 import { Catalog } from "../../models/catalog";
 import { HomeService } from './../../services/home.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -11,41 +12,40 @@ import { HomeService } from './../../services/home.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit, OnDestroy{
-  catalogs$!: Observable<Catalog[]>
-  destroy$ = new Subject()
+  destroy$ = new Subject<void>();
+  catalogs!: Catalog[];
+  search = new FormControl();
 
   constructor(
     private homeService: HomeService,
     private dialog: MatDialog
   ){}
 
-  ngOnDestroy(): void {
-    this.destroy$.next;
-    this.destroy$.complete;
+  ngOnInit(): void {
+    this.search.valueChanges
+      .pipe(
+        startWith(''),
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap(value => this.homeService.getCatalogByName(value)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((res) => this.catalogs = res)
+
+    this.homeService.currentCatalogs
+      .pipe(
+        switchMap(() => this.homeService.getCatalog()),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((res) => this.catalogs = res)
   }
 
-  ngOnInit(): void {
-    this.catalogs$ = this.homeService.getCatalog()
-    this.catalogs$.subscribe((res) => console.log(res))
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(NewGameDialogComponent);
-
-    dialogRef
-    .afterClosed()
-    .pipe(
-      switchMap(catalog => {
-      if(catalog) {
-        this.homeService.addCatalog(catalog)
-      }
-      return catalog;
-      }),
-      takeUntil(this.destroy$)
-    )
-    .subscribe(
-      () => console.log('Game adicionado com sucesso'),
-      err => console.log(err)
-    );
+    this.dialog.open(NewGameDialogComponent);
   }
 }

@@ -22,7 +22,7 @@
       <mat-label>Console</mat-label>
       <mat-select formControlName="console" required>
         <mat-option *ngFor="let console of consoles" [value]="console.value">
-          {{console.viewValue}}
+          {{console.value}}
         </mat-option>
       </mat-select>
       <mat-error *ngIf="gameForm.get('console')?.hasError('required')">
@@ -37,12 +37,13 @@
 
     <mat-slide-toggle formControlName="completed">Completed</mat-slide-toggle>
 
-    <mat-form-field color="accent">
+    <mat-form-field color="accent" *ngIf="isShowDateCompletion()">
       <mat-label>Completed date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="dateCompletion">
+      <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="dateCompletion">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="gameForm.get('dateCompletion')?.hasError('matDatepickerMax')">Date should be inferior</mat-error>
     </mat-form-field>
   </form>
 </div>
@@ -52,6 +53,7 @@
     mat-raised-button
     color="primary"
     type="submit"
+    (click)="onSubmit()"
     [disabled]="!gameForm.valid"
     [mat-dialog-close]="gameForm.value"
   >

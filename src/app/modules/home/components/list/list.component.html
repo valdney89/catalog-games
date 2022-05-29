@@ -1,26 +1,46 @@
-<h1 class="list-title">Game Catalog</h1>
+<section class="list">
+  <h1 class="list-title">Game Catalog</h1>
 
-<section class="list-actions">
-  <button
-    mat-raised-button color="primary"
-    (click)="openDialog()"
-  >New Game</button>
-</section>
+  <section class="list-actions">
+    <form>
+      <mat-form-field color="accent">
+        <mat-label>Search by title</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="search"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let catalog of catalogs" [value]="catalog.title">
+            {{ catalog.title }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
 
-<section class="list-section">
-  <ng-container *ngIf="(catalogs$ | async)?.length; else noCatalog">
-    <app-game-card
-      class="game-card"
-      *ngFor="let catalog of catalogs$ | async"
-      [title]="catalog.title"
-      [subtitle]="catalog.console"
-      [content]="catalog?.personalNotes"
-      [year]="catalog.year"
-      [dateCompletion]="catalog?.dateCompletion"
-      [completed]="catalog.completed"
-    ></app-game-card>
-  </ng-container>
-  <ng-template #noCatalog>
-    <small tabindex="0" role="alert">Nothing here, add your first game in catalog!</small>
-  </ng-template>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      New Game
+    </button>
+  </section>
+
+  <section class="list-section">
+    <ng-container *ngIf="catalogs?.length; else noCatalog">
+      <app-game-card
+        class="game-card"
+        *ngFor="let catalog of catalogs"
+        [title]="catalog.title"
+        [console]="catalog.console"
+        [content]="catalog.personalNotes"
+        [year]="catalog.year"
+        [dateCompletion]="catalog.dateCompletion"
+        [completed]="catalog.completed"
+      ></app-game-card>
+    </ng-container>
+    <ng-template #noCatalog>
+      <small tabindex="0" role="alert"
+        >Nothing here, add your first game in catalog!</small
+      >
+    </ng-template>
+  </section>
 </section>
