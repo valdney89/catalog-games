@@ -16,4 +16,8 @@ export class HomeService {
   getCatalog(): Observable<Catalog[]>{
     return this.http.get<Catalog[]>(APIURL);
   }
+
+  addCatalog(catalog: Catalog): Observable<Catalog> {
+    return this.http.post<Catalog>(APIURL, catalog)
+  }
 }
