@@ -1,0 +1,54 @@
+<h1 mat-dialog-title tabindex="0">New Game</h1>
+<div mat-dialog-content>
+  <p tabindex="0">Fill the fields to add a new game</p>
+  <form class="form-field" [formGroup]="gameForm" (submit)="onSubmit()">
+    <mat-form-field color="accent">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" required />
+      <!-- <mat-error
+        *ngIf="
+          gameForm.controls.title.touched
+          && gameForm.controls.title.invalid
+        "
+      >
+        <span *ngIf="gameForm.controls.title.errors.required">
+          This field is mandatory.
+        </span>
+      </mat-error> -->
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Year</mat-label>
+      <input matInput formControlName="year" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Console</mat-label>
+      <input matInput formControlName="console" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Completed</mat-label>
+      <input matInput formControlName="completed" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dateCompletion">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Personal Notes</mat-label>
+      <textarea matInput formControlName="personalNotes" required></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="form-field--footer">
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button
+    mat-raised-button
+    [disabled]="!gameForm.valid"
+    [mat-dialog-close]="gameForm"
+    color="primary"
+  >
+    Add
+  </button>
+</div>
