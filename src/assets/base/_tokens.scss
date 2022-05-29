@@ -1,0 +1,58 @@
+$danger: #dc3545;
+$danger-lightest: #ed9aa2;
+
+$success: #28a745;
+$success-lightest: #93d3a2;
+
+$warning: #ffc107;
+$warning-lightest: #ffe083;
+
+$info: #17a2b8;
+$info-lightest: #8bd0db;
+
+/* border radius */
+
+$border-radius-none: 0px;
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-pill: 50px;
+
+/* border width */
+
+$border-width-none: 0px;
+$border-width-hairline: 1px;
+$border-width-thin: 2px;
+$border-width-thick: 4px;
+$border-width-heavy: 8px;
+
+/* Spacing */
+
+$spacing-stack-quarck: 4px;
+$spacing-stack-nano: 8px;
+$spacing-stack-xxxs: 16px;
+$spacing-stack-xxs: 24px;
+$spacing-stack-xs: 32px;
+$spacing-stack-sm: 40px;
+$spacing-stack-md: 48px;
+$spacing-stack-lg: 56px;
+$spacing-stack-xl: 64px;
+
+$spacing-inset-quarck: 4px;
+$spacing-inset-nano: 8px;
+$spacing-inset-xs: 16px;
+$spacing-inset-sm: 24px;
+$spacing-inset-md: 32px;
+$spacing-inset-lg: 40px;
+
+$spacing-squish-quarck: 4px 8px;
+$spacing-squish-nano: 6px 12px;
+$spacing-squish-xs: 8px 16px;
+$spacing-squish-sm: 16px 24px;
+$spacing-squish-md: 24px 32px;
+
+/* breakpoints */
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
