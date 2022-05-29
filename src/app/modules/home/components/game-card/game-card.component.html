@@ -2,7 +2,7 @@
   <mat-card-title>{{ title }}</mat-card-title>
   <mat-card-subtitle>{{ subtitle }} - {{ year }}</mat-card-subtitle>
   <mat-card-content>
-    <p>{{ content }}</p>
+    <p *ngIf="content">{{ content }}</p>
     <small *ngIf="completed; else noCompleted">
       <strong>Date of Completion:</strong> {{ dateCompletion | date: 'shortDate'}}
     </small>

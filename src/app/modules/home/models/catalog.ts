@@ -3,6 +3,6 @@ export interface Catalog {
   year: number,
   console: string,
   completed: boolean,
-  dateCompletion: string,
-  personalNotes: string
+  dateCompletion?: string,
+  personalNotes?: string
 }

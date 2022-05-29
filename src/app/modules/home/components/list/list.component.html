@@ -14,9 +14,9 @@
       *ngFor="let catalog of catalogs$ | async"
       [title]="catalog.title"
       [subtitle]="catalog.console"
-      [content]="catalog.personalNotes"
+      [content]="catalog?.personalNotes"
       [year]="catalog.year"
-      [dateCompletion]="catalog.dateCompletion"
+      [dateCompletion]="catalog?.dateCompletion"
       [completed]="catalog.completed"
     ></app-game-card>
   </ng-container>
