@@ -1,6 +1,6 @@
 <mat-card [ngClass]="{'completed': completed}">
   <mat-card-title>{{ title }}</mat-card-title>
-  <mat-card-subtitle>{{ console }} - {{ this.getYear() }}</mat-card-subtitle>
+  <mat-card-subtitle>{{ console }} - {{ this.getYearAgo() }}</mat-card-subtitle>
   <mat-card-content>
     <p *ngIf="content">{{ content }}</p>
     <small *ngIf="completed; else noCompleted">

@@ -15,7 +15,7 @@ export class GameCardComponent {
   @Input() dateCompletion!: string | undefined;
   @Input() completed!: boolean;
 
-  getYear() {
+  getYearAgo() {
     return moment(this.year, "YYYYMMDD").fromNow();
   }
 }
