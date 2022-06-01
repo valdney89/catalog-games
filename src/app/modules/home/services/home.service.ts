@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, Subject } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Catalog } from '../models/catalog';
@@ -21,11 +21,29 @@ export class HomeService {
   }
 
   getCatalog(): Observable<Catalog[]> {
-    return this.http.get<Catalog[]>(APIURL_CATALOG);
+    return this.http.get<Catalog[]>(APIURL_CATALOG).pipe(
+      map(catalogs =>
+        catalogs.sort((a, b) => {
+          if(a === null) {
+            return 1;
+          }
+
+          if(b === null) {
+            return -1;
+          }
+
+          if(a === b) {
+            return 0;
+          }
+
+          return new Date(b.dateCompletion as string).getTime() - new Date(a.dateCompletion  as string).getTime()
+        })
+      )
+    );
   }
 
   getCatalogByName(value: string): Observable<Catalog[]> {
-    return this.http.get<Catalog[]>(APIURL_CATALOG).pipe(
+    return this.getCatalog().pipe(
       map((data) => {
         return data.filter((catalog) =>
           catalog.title.toLowerCase().includes(value?.toLowerCase())

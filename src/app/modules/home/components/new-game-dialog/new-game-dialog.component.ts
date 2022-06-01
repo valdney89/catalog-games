@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Console } from "../../models/console"
 import { Subject } from 'rxjs';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   template: `Game added with success`,
@@ -59,7 +59,7 @@ export class NewGameDialogComponent implements OnInit,OnDestroy {
     this.destroy$.complete();
   }
 
-  onNoClick(): void {
+  onClose(): void {
     this.dialogRef.close();
   }
 
@@ -72,13 +72,15 @@ export class NewGameDialogComponent implements OnInit,OnDestroy {
       this.homeService.addCatalog(this.gameForm.value)
         .pipe(takeUntil(this.destroy$))
         .subscribe(
-          () => {
+          (res) => {
+            console.log(res)
             this.snackBar.openFromComponent(NewGameSnackBarComponent, {
               duration: 5000,
             });
 
             this.homeService.changeCatalogs()
-          }
+          },
+          err => console.log(err)
         )
     }
   }

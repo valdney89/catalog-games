@@ -48,15 +48,18 @@
   </form>
 </div>
 <div mat-dialog-actions class="form-field--footer">
-  <button mat-button (click)="onNoClick()">Close</button>
   <button
+    class="close-btn"
+    mat-button
+    (click)="onClose()"
+  >Close</button>
+  <button
+    class="add-btn"
     mat-raised-button
     color="primary"
     type="submit"
     (click)="onSubmit()"
     [disabled]="!gameForm.valid"
     [mat-dialog-close]="gameForm.value"
-  >
-    Add
-  </button>
+  >Add</button>
 </div>

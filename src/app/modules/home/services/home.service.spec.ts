@@ -22,7 +22,7 @@ const mockData = {
       year: 1997,
       console: "PS1",
       completed: true,
-      dateCompletion: "2000-01-01T10:00:00.000Z",
+      dateCompletion: "2022-01-01T10:00:00.000Z",
       personalNotes: "Awesome rpg game."
     }
   ],
@@ -53,10 +53,10 @@ describe('HomeService', () => {
 
   afterEach(() => httpController.verify());
 
-  it('should return catalogs', done => {
+  it('should return catalogs sorted by dateCompleted in desc order', done => {
     service.getCatalog().subscribe(catalogs => {
-      expect(catalogs[0].title).toBe('Metal Gear Solid 2');
-      expect(catalogs[1].title).toBe('Final Fantasy VII');
+      expect(catalogs[0].title).toBe('Final Fantasy VII');
+      expect(catalogs[1].title).toBe('Metal Gear Solid 2');
       done();
     });
 
@@ -77,14 +77,16 @@ describe('HomeService', () => {
   });
 
   it('should add catalog in API', done => {
-    service.addCatalog(mockData.data[0]).subscribe(catalog => {
-      expect(catalog.title).toBe('Metal Gear Solid 2');
+    const data = { title: "Ace Combat", console: "ps2", year: 2000, completed: true }
+
+    service.addCatalog(data).subscribe(catalog => {
+      expect(catalog.title).toBe('Ace Combat');
       done();
     });
 
     httpController
       .expectOne(mockData.apiCatalog)
-      .flush(mockData.data[0]);
+      .flush(data);
   });
 
   it('should return consoles', done => {
