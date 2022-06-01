@@ -1,6 +1,6 @@
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatDialogModule } from '@angular/material/dialog';
 import { HomeService } from "../../services/home.service";
 import { ListComponent } from "./list.component";
