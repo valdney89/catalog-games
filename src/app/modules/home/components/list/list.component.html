@@ -2,7 +2,7 @@
   <h1 class="list-title">Game Catalog</h1>
 
   <section class="list-actions">
-    <form>
+    <form *ngIf="catalogs?.length">
       <mat-form-field color="accent">
         <mat-label>Search by title</mat-label>
         <input
@@ -38,9 +38,9 @@
       ></app-game-card>
     </ng-container>
     <ng-template #noCatalog>
-      <small tabindex="0" role="alert"
-        >Nothing here, add your first game in catalog!</small
-      >
+      <small tabindex="0" role="alert">
+        Nothing here...
+      </small>
     </ng-template>
   </section>
 </section>
