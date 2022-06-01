@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Catalog } from '../models/catalog';
 import { Console } from '../models/console';
 
-const APIURL_CATALOG = `${environment.apiUrl}catalog?_sort=dateCompletion&_order=desc`;
+const APIURL_CATALOG = `${environment.apiUrl}catalog`;
 const APIURL_CONSOLES = `${environment.apiUrl}consoles`;
 
 @Injectable({ providedIn: 'root' })
