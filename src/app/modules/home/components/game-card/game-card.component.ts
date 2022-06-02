@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Console } from "../../models/console"
+
 import * as moment from 'moment';
 
 @Component({

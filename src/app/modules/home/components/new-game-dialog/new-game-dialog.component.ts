@@ -1,12 +1,13 @@
-import { takeUntil } from 'rxjs';
-import { HomeService } from './../../services/home.service';
-import { Catalog } from './../../models/catalog';
+import { takeUntil, Subject } from 'rxjs';
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Console } from "../../models/console"
-import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { Console } from "../../models/console"
+import { HomeService } from './../../services/home.service';
+import { Catalog } from './../../models/catalog';
+
 
 @Component({
   template: `Game added with success`,

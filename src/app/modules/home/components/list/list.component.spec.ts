@@ -1,9 +1,13 @@
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatDialogModule } from '@angular/material/dialog';
+
 import { HomeService } from "../../services/home.service";
 import { ListComponent } from "./list.component";
+import { ListResolver } from './list.resolver';
+
 
 const MOCK_DATA = [
   {
@@ -20,12 +24,16 @@ const MOCK_DATA = [
 describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
+  let resolver: ListResolver;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, MatDialogModule, MatAutocompleteModule],
+      imports: [HttpClientTestingModule, MatDialogModule, MatAutocompleteModule, RouterTestingModule],
       declarations: [ListComponent],
-      providers: [HomeService]
+      providers: [
+        HomeService,
+        { provide: ListResolver, useValue: MOCK_DATA }
+      ]
     })
     .compileComponents();
   });
@@ -33,6 +41,7 @@ describe('ListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ListComponent);
     component = fixture.componentInstance;
+    resolver = TestBed.inject(ListResolver);
     fixture.detectChanges();
   });
 

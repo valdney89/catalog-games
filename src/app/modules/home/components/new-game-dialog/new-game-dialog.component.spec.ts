@@ -10,6 +10,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 import { HomeService } from "../../services/home.service";
 import { NewGameDialogComponent } from "./new-game-dialog.component";
 
